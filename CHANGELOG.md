@@ -28,4 +28,5 @@
 
 ### Next work item:
 1. datepicker position
-2. custom attributes move to data-calender-options{"theme": "light/right","direction": "left-right/top-bottom", "time": true/false, "seconds": true/false, }
+2. custom attributes move to data-calender-options{"theme": "light/right","direction": "left-right/top-bottom", "time": true/false, "seconds": true/false, };
+3. issue fixes
