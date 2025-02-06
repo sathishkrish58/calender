@@ -1,0 +1,266 @@
+/* ===========================
+   Base Calendar Dialog Styles
+=========================== */
+.calendar-dialog {
+    position: absolute;
+    width: 250px;
+    background: var(--bg-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transform: perspective(800px) rotateX(-15deg);
+    transform-origin: top;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 9999;
+    display: none;
+    /* Hidden by default */
+    overflow: hidden;
+}
+
+.calendar-dialog.open {
+    display: block;
+    opacity: 1;
+    transform: perspective(800px) rotateX(0deg);
+}
+
+/* ===========================
+     Header & macOS Style Buttons
+  =========================== */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Container for previous/next and month/year */
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-icon {
+    display: flex;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: color 0.2s ease;
+    border-radius: 4px;
+}
+
+.nav-icon:hover {
+    background-color: var(--hover-bg-color);
+}
+
+.nav-icon:hover svg {
+    fill: var(--hover-icon-color);
+}
+
+/* Month & Year Title */
+#monthYear {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    min-width: 100px;
+    color: var(--text-color);
+    transition: color 0.2s ease;
+}
+
+/* ===========================
+     Calendar Grid & Day Cells
+  =========================== */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    padding: 10px;
+    
+}
+
+.calendar-grid-animation {
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+
+.calendar-grid-days-container {
+    padding: 0;
+}
+
+.calendar-grid-one {
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.calendar-grid-three {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.calendar-grid-seven {
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.day-cell {
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.day-cell:hover {
+    background: var(--hover-bg-color);
+    transform: scale(1.05);
+}
+
+@keyframes slideRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-right {
+    animation-name: slideRight;
+}
+
+@keyframes slideLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-left {
+    animation-name: slideLeft;
+}
+
+.prev-month, .next-month {
+    color: #a0a0a0; /* Grey text color */
+    opacity: 0.5; /* Slightly transparent */
+    padding: 5px;
+    text-align: center;
+    cursor: default;
+}
+
+.prev-month:hover, .next-month:hover {
+    background: none;
+}
+
+/* Header row for day labels (Sun, Mon, etc.) */
+.day-label {
+    font-weight: bold;
+    text-align: center;
+}
+
+.day-cell.selected, .month-cell.selected, .year-cell.selected {
+    background: var(--selected-bg-color);
+    color: var(--selected-text-color);
+}
+
+/* Month view: month cell style */
+.month-cell {
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    background: var(--hover-bg-color);
+    transition: background 0.2s ease;
+}
+
+.month-cell:hover {
+    background: blue;
+    color: #fff;
+}
+
+/* Year view: year cell style */
+.year-cell {
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    background: var(--hover-bg-color);
+    transition: background 0.2s ease;
+}
+
+.year-cell:hover {
+    background: blue;
+    color: #fff;
+}
+
+/* ===========================
+     Time Picker (Optional)
+  =========================== */
+.time-picker {
+    padding-block: 5px;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+
+.time-picker select {
+    font-size: 14px;
+    padding: 4px;
+    margin: 0 2px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.time-picker option {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* ===========================
+     Light Mode Theme
+  =========================== */
+.light-mode {
+    --bg-color: #ffffff;
+    --text-color: #333;
+    --border-color: #ddd;
+    --hover-bg-color: #f0f0f0;
+    --hover-icon-color: blue;
+    --selected-text-color: #ffffff;
+    --selected-bg-color:#333;
+}
+
+/* ===========================
+     Dark Mode Theme
+  =========================== */
+.dark-mode {
+    --bg-color: #2c2c2c;
+    --text-color: #ddd;
+    --border-color: #444;
+    --hover-bg-color: #616161;
+    --hover-icon-color: #5cff48;
+    --selected-text-color: #2c2c2c;
+    --selected-bg-color:#ffffff;
+}
+
+/* ===========================
+     Inherit Text Colors
+  =========================== */
+.calendar-dialog {
+    color: var(--text-color);
+}
+
+/* ===========================
+     Additional Styling (Optional)
+  =========================== */
+/* For example, you might style a close icon if added separately */
+/*
+  .close-icon {
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0 10px;
+  }
+  */

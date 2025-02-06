@@ -1,0 +1,21 @@
+.flex-container {
+    display: flex;
+    padding: 10px;
+    column-gap: 10px;
+}
+
+.input-container {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.input-container label {
+    font-size: 14px;
+    color: #525252;
+}
+
+.input-container input {
+    padding: 5px;
+}

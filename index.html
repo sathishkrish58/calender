@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Calendar</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="calendar.css">
+</head>
+
+<body>
+    <div class="flex-container">
+
+        <div class="input-container">
+            <label for="inputLight">Light Mode (Date Only):</label>
+            <input type="text" id="inputLight" data-calender data-mode="light" data-format="dd-MM-yyyy"
+                data-time="false" data-second="false" readonly />
+        </div>
+
+        <div class="input-container">
+            <label for="inputTime">Light Mode (Date + Time):</label>
+            <input type="text" id="inputTime" data-calender data-mode="light" data-format="dd-MM-yyyy HH:mm"
+                data-time="true" data-second="false" readonly />
+        </div class="input-container">
+
+        <div class="input-container">
+            <label for="inputTimeSeconds">Light Mode (Date + Time with Seconds):</label>
+            <input type="text" id="inputTimeSeconds" data-calender data-mode="light" data-format="dd-MM-yyyy HH:mm:ss"
+                data-time="true" data-second="true" readonly />
+        </div>
+
+        <div class="input-container">
+            <label for="inputDark">Dark Mode (Date Only):</label>
+            <input type="text" id="inputDark" data-calender data-mode="dark" data-format="dd-MM-yyyy" data-time="false"
+                data-second="false" readonly />
+        </div>
+
+        <div class="input-container">
+            <label for="inputTimeSeconds">Dark Mode (Date + Time with Seconds):</label>
+            <input type="text" id="inputTimeSeconds" data-calender data-mode="dark" data-format="dd-MM-yyyy HH:mm:ss"
+                data-time="true" data-second="true" readonly />
+        </div>
+    </div>
+
+    <script src="calendar.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // Global variable to hold the currently active calendar instance
+            window.currentCalendarInstance = null;
+
+            // Attach focus event listener to each input with data-calender attribute.
+            const inputs = document.querySelectorAll("input[data-calender]");
+
+            inputs.forEach(input => {
+                input.addEventListener("focus", function (e) {
+                    // If a calendar instance already exists, destroy it
+                    if (window.currentCalendarInstance) {
+                        window.currentCalendarInstance.destroy();
+                        window.currentCalendarInstance = null;
+                    }
+
+                    // Read configuration from custom attributes
+                    const mode = input.dataset.mode || "light";
+                    const format = input.dataset.format || "dd-MM-yyyy";
+                    const showTime = input.dataset.time === "true";
+                    const showSecond = input.dataset.second === "true";
+
+                    // Create a new Calendar instance for the focused input
+                    window.currentCalendarInstance = new Calendar({
+                        inputElement: input,
+                        mode: mode,
+                        format: format,
+                        showTime: showTime,
+                        showSeconds: showSecond
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
