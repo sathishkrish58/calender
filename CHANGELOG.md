@@ -20,6 +20,10 @@
 - Event creation and management
 - Monthly, weekly, and daily views
 
+## [1.0.1] - 2025-02-07
+ - custom attributes Added
+
+
 ### Changed
 - N/A
 
@@ -27,6 +31,10 @@
 - N/A
 
 ### Next work item:
-1. datepicker position
-2. custom attributes move to data-calender-options{"theme": "light/right","direction": "left-right/top-bottom", "time": true/false, "seconds": true/false, };
-3. issue fixes
+1. datepicker position.
+2. cell mouse over text scale to 1.5
+3. time and second move right side else as of now don't add.
+4. touchness
+
+### Reference picker
+[Date picker](https://demo.mobiscroll.com/javascript/calendar/mobile-desktop-usage#)

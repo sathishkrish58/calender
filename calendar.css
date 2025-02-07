@@ -34,6 +34,34 @@
     border-bottom: 1px solid var(--border-color);
 }
 
+.header-left {
+    display: flex;
+    gap: 5px;
+    width: 70%;
+}
+
+.month-container,
+.year-container {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.month-display {
+    min-width: 100px;
+    text-align: left;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--header-text-color);
+    transition: color 0.2s ease;
+}
+
+.month-display:hover,{
+    color: var(--header-hover-text-color);
+    opacity: 0.8;
+}
+
 /* Container for previous/next and month/year */
 .nav-icons {
     display: flex;
@@ -46,7 +74,7 @@
     cursor: pointer;
     color: var(--text-color);
     transition: color 0.2s ease;
-    border-radius: 4px;
+    border-radius: 10px;
 }
 
 .nav-icon:hover {
@@ -57,15 +85,11 @@
     fill: var(--hover-icon-color);
 }
 
-/* Month & Year Title */
-#monthYear {
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
-    text-align: center;
-    min-width: 100px;
-    color: var(--text-color);
-    transition: color 0.2s ease;
+.header-right {
+    width: 10%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
 }
 
 /* ===========================
@@ -76,7 +100,6 @@
     grid-template-columns: repeat(7, 1fr);
     gap: 4px;
     padding: 10px;
-    
 }
 
 .calendar-grid-animation {
@@ -104,12 +127,13 @@
     padding: 5px;
     text-align: center;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 15px;
     transition: background 0.2s ease, transform 0.2s ease;
+    border: 1px solid transparent;
 }
 
 .day-cell:hover {
-    background: var(--hover-bg-color);
+    background: var(--day-cell-hover-bg-color);
     transform: scale(1.05);
 }
 
@@ -118,6 +142,7 @@
         transform: translateX(100%);
         opacity: 0;
     }
+
     to {
         transform: translateX(0);
         opacity: 1;
@@ -133,6 +158,7 @@
         transform: translateX(-100%);
         opacity: 0;
     }
+
     to {
         transform: translateX(0);
         opacity: 1;
@@ -143,57 +169,64 @@
     animation-name: slideLeft;
 }
 
-.prev-month, .next-month {
-    color: #a0a0a0; /* Grey text color */
-    opacity: 0.5; /* Slightly transparent */
-    padding: 5px;
+.prev-month,
+.next-month {
+    color: #a0a0a0;
+    opacity: 0.6;
     text-align: center;
-    cursor: default;
 }
 
-.prev-month:hover, .next-month:hover {
-    background: none;
+.prev-month:hover,
+.next-month:hover {
+    color: var(--text-color);
+    opacity: 0.8;
 }
 
 /* Header row for day labels (Sun, Mon, etc.) */
 .day-label {
-    font-weight: bold;
     text-align: center;
 }
 
-.day-cell.selected, .month-cell.selected, .year-cell.selected {
+.year-view {
+    display: grid;
+}
+
+.year-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 4fr);
+    gap: 4px;
+    padding: 10px;
+}
+
+.day-cell.selected,
+.month-cell.selected,
+.year-cell.selected {
     background: var(--selected-bg-color);
     color: var(--selected-text-color);
+    transform: scale(1);
 }
 
-/* Month view: month cell style */
-.month-cell {
-    padding: 8px;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 4px;
-    background: var(--hover-bg-color);
-    transition: background 0.2s ease;
+.day-cell.current-date {
+    border-color: var(--current-date-border-color);
 }
 
 .month-cell:hover {
-    background: blue;
-    color: #fff;
+    background: var(--day-cell-hover-bg-color);
 }
 
 /* Year view: year cell style */
-.year-cell {
-    padding: 8px;
+.year-cell, .month-cell {
+    margin: 8px;
+    padding: 9px;
     text-align: center;
     cursor: pointer;
-    border-radius: 4px;
-    background: var(--hover-bg-color);
+    border-radius: 20px;
     transition: background 0.2s ease;
 }
 
 .year-cell:hover {
-    background: blue;
-    color: #fff;
+    background: var(--day-cell-hover-bg-color);
+    /* color: #fff; */
 }
 
 /* ===========================
@@ -220,6 +253,33 @@
     color: var(--text-color);
 }
 
+.hidden {
+    display: none;
+}
+
+.calendar-footer {
+    display: flex;
+    justify-content: space-between;
+    /* Places buttons at opposite ends */
+    align-items: center;
+    padding: 5px 8px;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Shared button styles */
+.calendar-footer .button {
+    padding: 4px 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.calendar-footer .button:hover {
+    background-color: #f0f0f0;
+}
+
 /* ===========================
      Light Mode Theme
   =========================== */
@@ -227,10 +287,14 @@
     --bg-color: #ffffff;
     --text-color: #333;
     --border-color: #ddd;
-    --hover-bg-color: #f0f0f0;
+    --hover-bg-color: #8e8eff;
+    --day-cell-hover-bg-color: #ebf5ff;
     --hover-icon-color: blue;
     --selected-text-color: #ffffff;
-    --selected-bg-color:#333;
+    --selected-bg-color: #0000ff;
+    --current-date-border-color: #1616ff;
+    --header-text-color: #1b85ff;
+    --header-hover-text-color: #479dff;
 }
 
 /* ===========================
@@ -241,9 +305,13 @@
     --text-color: #ddd;
     --border-color: #444;
     --hover-bg-color: #616161;
+    --day-cell-hover-bg-color: #d8d8d8;
     --hover-icon-color: #5cff48;
     --selected-text-color: #2c2c2c;
-    --selected-bg-color:#ffffff;
+    --selected-bg-color: #ffffff;
+    --current-date-border-color: #ffffff;
+    --header-text-color: #e4e4e4;
+    --header-hover-text-color: #bbbbbb;
 }
 
 /* ===========================
