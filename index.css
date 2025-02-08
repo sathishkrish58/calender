@@ -17,5 +17,8 @@
 }
 
 .input-container input {
-    padding: 5px;
+    padding-inline: 5px;
+    padding-block: 10px;
+    border-radius: 5px;
+    border: 1px solid;
 }

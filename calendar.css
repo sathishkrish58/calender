@@ -57,7 +57,7 @@
     transition: color 0.2s ease;
 }
 
-.month-display:hover,{
+.month-display:hover {
     color: var(--header-hover-text-color);
     opacity: 0.8;
 }
@@ -135,6 +135,20 @@
 .day-cell:hover {
     background: var(--day-cell-hover-bg-color);
     transform: scale(1.05);
+}
+
+.cell-text {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.day-cell.selected:hover .cell-text {
+    color: var(--bg-color);
+}
+
+.day-cell:hover .cell-text {
+    color: var(--hover-text-color);
+    transform: scale(1.10);
 }
 
 @keyframes slideRight {
@@ -215,7 +229,8 @@
 }
 
 /* Year view: year cell style */
-.year-cell, .month-cell {
+.year-cell,
+.month-cell {
     margin: 8px;
     padding: 9px;
     text-align: center;
@@ -287,6 +302,7 @@
     --bg-color: #ffffff;
     --text-color: #333;
     --border-color: #ddd;
+    --hover-text-color: #333;
     --hover-bg-color: #8e8eff;
     --day-cell-hover-bg-color: #ebf5ff;
     --hover-icon-color: blue;
@@ -304,6 +320,7 @@
     --bg-color: #2c2c2c;
     --text-color: #ddd;
     --border-color: #444;
+    --hover-text-color: #333;
     --hover-bg-color: #616161;
     --day-cell-hover-bg-color: #d8d8d8;
     --hover-icon-color: #5cff48;
@@ -320,15 +337,3 @@
 .calendar-dialog {
     color: var(--text-color);
 }
-
-/* ===========================
-     Additional Styling (Optional)
-  =========================== */
-/* For example, you might style a close icon if added separately */
-/*
-  .close-icon {
-    cursor: pointer;
-    font-size: 18px;
-    padding: 0 10px;
-  }
-  */

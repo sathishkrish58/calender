@@ -22,6 +22,7 @@
 
 ## [1.0.1] - 2025-02-07
  - custom attributes Added
+ - Cell mouse over text scale to 1.5
 
 
 ### Changed
@@ -32,9 +33,9 @@
 
 ### Next work item:
 1. datepicker position.
-2. cell mouse over text scale to 1.5
-3. time and second move right side else as of now don't add.
-4. touchness
+2. time and second move right side else as of now don't add.
+3. touchness
+4. 
 
 ### Reference picker
 [Date picker](https://demo.mobiscroll.com/javascript/calendar/mobile-desktop-usage#)
