@@ -344,7 +344,6 @@
             this.calendarDialog.querySelector("#calendar-cancel").addEventListener("click", this.destroy.bind(this));
             this.calendarDialog.querySelector("#calendar-save").addEventListener("click", this.selectedCell.bind(this));
             this.calendarDialog.querySelector("#monthYear").addEventListener("click", this.changeView.bind(this));
-            this.calendarDialog.addEventListener("click", (e) => { e.stopPropagation(); this.inputField.focus() });
             this.calendarDialog.addEventListener("click", this.handleCell.bind(this));
             document.addEventListener("click", this.outsideClickHandler = (e) => {
                 if (!this.calendarDialog.contains(e.target) && e.target !== this.inputField) {
@@ -423,6 +422,9 @@
          * @param {Event} event - The event object.
          */
         handleCell(event) {
+            event.stopPropagation();
+            this.inputField.focus();
+            
             const target = event.target.closest('[data-value]');
             if (!target) {
                 return;
